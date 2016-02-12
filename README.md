@@ -19,7 +19,6 @@ tty << const_value << "\n"; //const values are not updated
 
 tty << "Some text" << "\n"; //Input of basic text
 
-tty.finish(); //Close update thread and clean up before exiting
 
 tty << HSpace('#') << "\n"; //Fill an entire line with a char
 tty << HSpace(' ') << "text" << HSpace(' ') << "\n"; //Align text in the middle
@@ -29,6 +28,14 @@ tty << VSpace(); //Fill vertical space
 float percent;
 //Show prograssbar on the right side of the screen, which represents the value of percent
 tty << HSpace(' ') << Progressbar<float>(50, 0, 100, percent);
+
+
+while(program_is_running) {
+  //Do stuff and update the values
+}
+
+tty.finish(); //Close update thread and clean up before exiting
+
 
 ```
 
