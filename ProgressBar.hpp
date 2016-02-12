@@ -36,7 +36,7 @@ std::ostream& operator<<(std::ostream& lhs, const ProgressBar<ArithmeticType>& p
 			lhs << "=";
 		}
 		if(chars < pb.width) lhs << ">";
-		for(int i = chars + 1; i < pb.width; i++) {
+		for(unsigned int i = chars + 1; i < pb.width; i++) {
 			lhs << " ";
 		}
 	}

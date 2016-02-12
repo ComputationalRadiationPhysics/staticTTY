@@ -138,7 +138,11 @@ void StaticTTY::parseSpacer()
 					auto linebreak = std::find(begin, refStr.end(), '\n');
 					if(linebreak != refStr.end()) {
 						for(std::reference_wrapper<unsigned int> wn : allSpacersOnLine) {
-							wn.get() = (cols - colLengths.at(lineNumber)) / allSpacersOnLine.size();
+							if(cols > colLengths.at(lineNumber)) {
+								wn.get() = (cols - colLengths.at(lineNumber)) / allSpacersOnLine.size();
+							} else {
+								wn.get() = 0;
+							}
 						}
 						
 						if(
@@ -162,8 +166,14 @@ void StaticTTY::parseSpacer()
 				allSpacersOnLine.push_back(width);
 				break;
 			}
-			case RuntimeRefBase::Spacer::VSpacer:	
-				dynamic_cast<ConstRuntimeRef<VSpace>*>(baseRef.get())->getRef().height = (rows - colLengths.size()) / numOfVSpacers - 1;
+			case RuntimeRefBase::Spacer::VSpacer:
+				if(rows > colLengths.size()) {
+					unsigned int& height = dynamic_cast<ConstRuntimeRef<VSpace>*>(baseRef.get())->getRef().height;
+					height = (rows - colLengths.size()) / numOfVSpacers;
+					if(height > 0) height -= 1; //leave room for the cursor on the last line;
+				} else {
+					dynamic_cast<ConstRuntimeRef<VSpace>*>(baseRef.get())->getRef().height = 0;
+				}
 				//-1 because the lowest line must be empty to position cursor
 				break;
 		}

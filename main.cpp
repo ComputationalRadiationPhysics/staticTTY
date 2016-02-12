@@ -20,8 +20,6 @@ int main() {
 	}
 	tty << "\n\n\n";
 	tty << HSpace(' ') << ProgressBar<float>(60, 0.0, 100.0, percent) << "   \n";
-	tty << VSpace();
-	tty << HSpace('X') << "\n";
 	
 	while(true) {
 		f++;
