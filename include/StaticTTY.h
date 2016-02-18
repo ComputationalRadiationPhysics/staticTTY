@@ -227,12 +227,11 @@ StaticTTY& StaticTTY::operator<<(const char rhs[]) {
 
 void StaticTTY::block()
 {
-	while(!exit) {
-		std::this_thread::sleep_for(interval);
-	};
+	runThread.join();
 }
 
 void StaticTTY::finish()
 {
 	exit = true;
+	block();
 }

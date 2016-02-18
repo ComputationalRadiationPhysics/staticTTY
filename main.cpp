@@ -1,5 +1,5 @@
 #include <iostream>
-#include "StaticTTY.h"
+#include "include/StaticTTY.h"
 
 int main() {
     StaticTTY tty;

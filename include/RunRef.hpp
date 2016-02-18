@@ -2,6 +2,7 @@
 
 #include <string>
 #include <type_traits>
+#include <iomanip>
 #include "hspace.hpp"
 #include "vspace.hpp"
 
@@ -31,6 +32,7 @@ public:
 	virtual ~RuntimeRef() {}
 	std::string toString() {
 		std::stringstream s;
+		s << std::setprecision(3) << std::fixed;
 		s << ref;
 		return s.str();
 	}
