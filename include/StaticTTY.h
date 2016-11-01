@@ -39,12 +39,14 @@ class StaticTTY
 {
 private:
 	bool exit;
+	bool outToFile;
 	std::chrono::milliseconds interval;
 	
 	std::thread runThread;
 	std::vector<std::shared_ptr<RuntimeRefBase>> refs;
 	
 	unsigned int cols, rows;
+	//std::ofstream outToFile;
 	
 	friend std::ostream& operator<<(std::ostream& lhs, const StaticTTY& rhs);
 
@@ -57,6 +59,7 @@ public:
 	const char* endl = "\n";
 
 	StaticTTY();
+	StaticTTY(std::string filename);
 	
 	template <class Type>
 	StaticTTY& operator<<(const Type& rhs);
